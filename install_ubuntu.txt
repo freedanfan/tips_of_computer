@@ -473,6 +473,12 @@ git remote add origin git@github.com:kungfuqian/tips_of_computer.git
 git push -u origin master
 
 
+用 SSH登录github 并且用SSH远程验证是否成功:
+在git bash中输入
+
+    ssh -T git@github.com
+
+
 ##############################
      install matlab
 ##############################
