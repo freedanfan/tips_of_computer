@@ -478,6 +478,17 @@ git push -u origin master
 
     ssh -T git@github.com
 
+使用ssh方式
+
+1、在每次push 的时候，都要输入用户名和密码，是不是很麻烦？原因是使用了https方式 push，在git bash里边输入 git remote -v
+可以看到形如一下的返回结果：
+
+2、接下来，我们把它换成ssh方式的。
+<pre>$ git remote rm origin
+$ git remote add origin git@github.com:sosout/myblog.git
+$ git push origin</pre>
+3、问题是不是解决了呢？可能这样还不行，还应该添加SSH公匙。ssh-keygen -t rsa -C “email”,email是你注册在github上的邮箱。
+
 
 ##############################
      install matlab
