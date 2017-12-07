@@ -1,0 +1,517 @@
+
+Ubuntu 16.04出现：Problem executing scripts APT::Update::Post-Invoke-Success 'if /usr/bin/test -w /var/cache/app-info -a -e /usr/bin/appstreamcli; then appstreamcli refresh > /dev/null; fi' 
+
+在运行sudo apt-get update时出现如上信息，解决方法如下：
+
+sudo pkill -KILL appstreamcli
+
+wget -P /tmp https://launchpad.net/ubuntu/+archive/primary/+files/appstream_0.9.4-1ubuntu1_amd64.deb https://launchpad.net/ubuntu/+archive/primary/+files/libappstream3_0.9.4-1ubuntu1_amd64.deb
+
+sudo dpkg -i /tmp/appstream_0.9.4-1ubuntu1_amd64.deb /tmp/libappstream3_0.9.4-1ubuntu1_amd64.deb
+
+执行完上述命令之后再次运行sudo apt-get update就不会再出现上面的错误。
+
+
+
+#######################################################################
+
+
+
+sudo apt-get update
+
+sudo apt-get upgrade
+
+https://www.pyimagesearch.com/2017/09/27/setting-up-ubuntu-16-04-cuda-gpu-for-deep-learning-with-python/
+
+
+################################
+          加载镜像
+################################
+
+sudo ntfsfix /dev/sda3
+
+
+################################
+  install sogoupinyin
+################################
+
+ sudo dpkg -i sogoupinyin_2.2.0.0102_amd64.deb 
+
+
+从系统设置里面点击“语言支持”，一开始的系统里面是没有小企鹅输入法的，搜狗输入法就是在小企鹅输入法基础上安装的，从语言支持里面选择小企鹅输入法（fcitx），默认为ibus
+
+sudo apt-get install -f
+
+
+重新打开“语言支持”，你会看到如下情况，证明错误已经修复，选择“安装”按钮
+
+
+  等他安装就好了，不用进行其他操作，期间会提示你输入密码，输入就好了，所有涉及到内核操作的都需要你输入密码，无所谓的，输入就好了。
+
+
+
+当安装结束以后，你会看到如下窗口，切记，一定要把系统键盘输入方式从ibus切换为fcitx
+
+
+在终端执行如下命令重启电脑
+    sudo reboot 
+
+
+重新启动以后，你会发现在屏幕右上方有了企鹅输入fcitx
+
+
+右键小企鹅，选择configureFcitx
+
+添加搜狗输入发
+
+首先，去掉那个只“显示当前语言”的选项，然后搜索框输入sog，你会发现搜狗输入法已经有了，选中输入法即可
+
+
+然后打开一个能输入文字的软件，比如浏览器，输入文字的时候，恩shift见，你会发现输入法有了，搜狗输入法安装成功，输入文字正常，但是这个时候，输入法显示会乱码，没关系，重启就好了
+
+用上面介绍过的重启命令重启电脑，重启以后，输入法就正常了。
+
+
+
+
+
+##################################################################################
+每次启动Ubuntu都显示System program problem detected，很烦人，不过修改一个文件就可以。
+##################################################################################
+
+
+ 执行命令：
+ sudo gedit /etc/default/apport 
+ 将enabled=1改为enabled=0保存退出即可
+
+
+################################
+  install chromium web browser
+################################
+
+
+get in ubuntu software and search "chromium web browser"
+
+install and login google account
+
+
+
+################################
+  install nvidia driver
+################################
+先到NVIDIA 官网上下载驱动文件（.run 格式）
+http://www.nvidia.cn/Download/index.aspx?lang=cn
+卸载已存在驱动版本
+
+
+sudo apt-get remove --purge nvidia*
+
+编译依赖
+
+执行uname -r，比如我的结果是4.4.0-45-generic
+
+执行
+
+sudo apt-get install build-essential pkg-config xserver-xorg-dev linux-headers-4.4.0-45-generic
+
+屏蔽开源驱动nouveau
+
+安装过程会询问是否屏蔽，手动屏蔽也有多种操作方式，如通过blacklist.conf或Grub2。这里选择blacklist：
+
+创建新文件：
+sudo apt-get install vim
+sudo vim /etc/modprobe.d/blacklist-nouveau.conf
+
+内容为
+
+blacklist nouveau
+
+options nouveau modeset=0
+
+再更新
+
+sudo update-initramfs -u
+
+结束X-window服务
+
+安装Nvidia驱动需要结束x-window服务，据说这一步很重要。
+
+sudo /etc/init.d gdm stop
+
+
+我这里是lightdm，不确定是哪个可以都试试，或是直接 init 3
+
+按Ctrl + Alt + F1 进入tty1控制台
+
+安装驱动
+
+执行驱动安装的run文件
+
+sudo sh ./NVIDIA-Linux-x86_64-367.57.run  或sudo sh ./NVIDIA*.run
+
+  （如果安装不正常则带 --uninstall 参数卸载）
+
+安装完后重启X-window
+
+
+按Ctrl + Alt + F7返回tty7图形界面
+
+检查
+
+
+nvidia-smi  可显示显卡一些信息
+
+nvidia-settings  显卡设置
+
+
+1.按住CTRL+ALT+F1 进入命令行
+
+2.    sudo service lightdm stop    或者   sudo stop lightdm
+
+3.    sudo init 3
+
+4.  安装驱动程序：     ＃:  sudo    ./NVIDIA-Linux-x86_64-177.67-pkg2.run      //当前目录下执行NVIDIA驱动程序
+
+5.   按照提示安装完成，简单方法重启就好了     sudo  reboot
+
+
+进入 root 账户
+同时按键Ctrl、Alt和F2 键
+init 3
+找到NVIDIA-Linux-x86_64-295.53.run所在的文件夹
+
+然后输入 sh NVIDIA-Linux-x86-<version numbers>.run
+安装过程中根据相应提示，即可完成安装
+
+
+################################
+      系统备份还原
+################################
+# 清理旧版本的软件缓存
+sudo apt-get autoclean
+#
+# 清理所有软件缓存
+sudo apt-get clean
+#
+# 删除系统不再使用的孤立软件
+sudo apt-get autoremove
+
+2. 使用TAR备份
+
+命令及参数解释
+v: 显示详细的压缩信息
+c：创建tar包
+j：使用bzip2压缩格式
+z：使用gzip压缩格式
+p：使用绝对路径
+f：生成的压缩文件的路径
+终端操作
+# 切换到root身份
+su - root
+#
+
+sudo add-apt-repository ppa:nemh/systemback
+sudo apt-get update
+sudo apt-get install systemback
+
+
+
+
+
+################################
+  install nvidia CUDA
+################################
+https://github.com/mind/wheels
+gcc降版本
+ubuntu的gcc编译器是5.4.0，然而cuda8.0不支持5.0以上的编译器，因此需要降级，把编译器版本降到4.9：
+在terminal中执行：
+sudo apt-get install g++-4.9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 20
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 10
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 20
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 10
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 30
+sudo update-alternatives --set cc /usr/bin/gcc
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 30
+sudo update-alternatives --set c++ /usr/bin/g++
+
+
+
+
+download  cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+
+# https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=debnetwork
+
+
+`sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb`
+`sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub`
+`sudo apt-get update`
+`sudo apt-get install cuda`
+
+安装完成后配置环境变量，在home下的 .bashrc中加入：
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64\
+                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export CUDA_HOME=/usr/local/cuda:$CUDA_HOME
+
+Environment Setup
+
+To change the environment variables for 64-bit operating systems:
+
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64\
+                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+
+Read more at: http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ixzz50UNrCc9Y
+Follow us: @GPUComputing on Twitter | NVIDIA on Facebook
+
+
+
+################################
+  install nvidia cuDNN
+################################
+download 
+cuDNN v6.0 Runtime Library for Ubuntu16.04 (Deb)
+
+cuDNN v6.0 Developer Library for Ubuntu16.04 (Deb)
+
+cuDNN v6.0 Code Samples and User Guide for Ubuntu16.04 (Deb)
+
+# https://developer.nvidia.com/rdp/cudnn-download
+# http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
+
+
+
+    Navigate to your <cudnnpath> directory containing the cuDNN Tar file.
+    Unzip the cuDNN package.
+
+    $ tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+
+    Copy the following files into the CUDA Toolkit directory.
+
+    $ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+    $ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+    $ sudo chmod a+r /usr/local/cuda/include/cudnn.h
+    /usr/local/cuda/lib64/libcudnn*
+
+
+2.3.2. Installing from a Debian File
+
+    Navigate to your <cudnnpath> directory containing cuDNN Debian file.
+    Install the runtime library, for example:
+
+    libcudnn6_6.0.21-1+cuda8.0_amd64.deb
+
+    Install the developer library, for example:
+
+    sudo dpkg -i libcudnn6-dev_6.0.21-1+cuda8.0_amd64.deb
+
+    Install the code samples and the cuDNN Library User Guide, for example:
+
+    sudo dpkg -i libcudnn6-doc_6.0.21-1+cuda8.0_amd64.deb
+
+2.4. Verifying
+
+To verify that cuDNN is installed and is running properly, compile the mnistCUDNN sample located in the /usr/src/cudnn_samples_v7 directory in the debian file.
+
+    Copy the cuDNN sample to a writable path.
+
+    $cp -r /usr/src/cudnn_samples_v6/ $HOME
+
+    Go to the writable path.
+
+    $ cd  $HOME/cudnn_samples_v6/mnistCUDNN
+
+    Compile the mnistCUDNN sample.
+
+    $make clean && make
+
+    Run the mnistCUDNN sample.
+
+    $ ./mnistCUDNN
+
+    If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
+
+    Test passed!
+
+
+
+Your LD_LIBRARY_PATH environment variable is not set up correctly. Ensure that your LD_LIBRARY_PATH includes the lib and/or lib64 directory where you installed the Toolkit, usually /usr/local/cuda-8.0/lib{,64}:
+	export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64\
+                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+Read more at: http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ixzz50UP95uJZ
+Follow us: @GPUComputing on Twitter | NVIDIA on Facebook
+
+
+
+
+##############################
+     install Anaconda3
+##############################
+download:  https://www.anaconda.com/download/#linux
+
+
+Optional: Verify data integrity with MD5 or SHA-256. (For more information on hashes, see cryptographic hash validation.)
+Run the following:
+   md5sum /home/qian/Anaconda3-5.0.1-Linux-x86_64.sh
+
+Enter the following to install Anaconda for Python 3.6:
+    bash Anaconda3-5.0.1-Linux-x86_64.sh
+
+    source ~/.bashrc
+ 
+open Terminal window and tpye:
+   anaconda-navigator
+
+
+
+##############################
+install tensorflow from source
+##############################
+download from: https://github.com/mind/wheels/releases/tag/tf1.4-gpu
+
+
+These wheels contain MKL support. You need to install MKL following the instructions here (you may need to use sudo for make install), 
+
+Installation
+
+Download Intel MKL-DNN source code or clone the repository to your system
+download from: https://github.com/01org/mkl-dnn#installation
+
+	git clone https://github.com/01org/mkl-dnn.git
+
+	cd scripts && ./prepare_mkl.sh && cd ..
+	mkdir -p build && cd build && cmake .. && make
+	make test
+	make doc
+	sudo make install
+
+
+pip --no-cache-dir install https://github.com/mind/wheels/releases/download/tf1.4-gpu-cuda9/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
+
+
+
+
+
+
+
+
+
+
+
+
+##############################################################
+learn from: https://www.tensorflow.org/install/install_sources
+
+### Install Bazel  ###
+# Using Bazel custom APT repository (recommended)
+1. Install JDK 8
+	sudo apt-get install openjdk-8-jdk
+2. Add Bazel distribution URI as a package source (one time setup)
+	echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+	curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+3. Install and update Bazel
+	sudo apt-get update && sudo apt-get install bazel
+Once installed, you can upgrade to a newer version of Bazel with:
+	sudo apt-get upgrade bazel
+
+#To install these packages for Python 3.n, issue the following command:
+
+	sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel
+
+
+./configure
+
+bazel build -c opt --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 --config=cuda -k //tensorflow/tools/pip_package:build_pip_package
+
+
+
+
+
+
+
+
+
+##############################
+     install pycharm
+##############################
+download: https://www.jetbrains.com/pycharm/download/#section=linux
+
+tar zxvf pycharm-community-2017.3.tar.gz
+
+Open a console and cd into "{installation home}/bin" and type:
+
+       ./pycharm.sh
+
+
+
+
+##############################
+     install matlab
+##############################
+
+sudo apt install rar
+
+在终端执行rar x MATHWORKS_R2014A.part1.rar（执行过程中part2也会被解压），解压后就会得到MATHWORKS_R2014A.iso文件。
+
+
+mkdir /home/qian/Matlab  
+sudo mount -t auto -o loop /home/qian/R2016b_glnxa64_dvd1.iso /home/qian/Matlab 
+
+sudo /home/qian/Matlab/install 
+注意，运行该命令的时候，终端不能处在/home/<user name>/Matlab目录底下，否则安装过程会被终止。
+注意，安装过程中用的全部都是绝对路径。
+
+在安装过程进行到75%时（不同的机器和Matlab版本可能会略有不同），安装界面会弹出提示，要求插入*dvd2.iso，此时，我们重新打开一个终端，一定要重新打开一个终端！键入如下命令（同*dvd1.iso的挂载命令类似）：
+
+sudo mount -t auto -o loop  /home/qian/R2016b_glnxa64_dvd2.iso /home/qian/Matlab  
+
+软件默认安装到 /usr/local/MATLAB/R2016b
+
+sudo mkdir licenses
+将破解软件 crack 复制到license此目录
+
+
+
+之后进入crack文件夹将libmwservices.so复制到/usr/local/MATLAB/R2014a/bin/glnxa64中：
+sudo cp libmwservices.so /usr/local/MATLAB/R2014a/bin/glnxa64/libmwservices.so
+
+至此matlab激活彻底完成，开始运行matlab：
+cd bin/
+
+./matlab
+
+
+命令行任意位置启动matlab：
+
+MATLAB启动程序默认会安装到/usr/local/MATLAB/bin目录中，由于系统默认不会将该目录加入PATH环境
+变量，因此，直接 在终端输入matlab命令将不会启动，解决方法非常简单:一种是将该路径加入到PATH中，
+另一种就是在/usr/loca/bin里建一个符号链接。 这里选择后者:
+    sudo ln -s /usr/local/MATLAB/R2016b/bin/matlab   /usr/local/bin/matlab
+之后在命令行中直接输入matlab即可启动Matlab应用。
+
+
+
+创建Matlab快捷方式：
+
+打开Ubuntu软件中心，搜索matlab，点击install；
+安装路径填入：
+/usr/local/MATLAB/R2015b
+用户权限不填，表示全部用户可用；gcc不填
+
+
+
+
+
+##############################
+      install opencv
+##############################
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D WITH_CUDA=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=~/Software/opencv_contrib-3.3.0/modules \
+    -D BUILD_EXAMPLES=ON ..
+
