@@ -445,6 +445,32 @@ Open a console and cd into "{installation home}/bin" and type:
        ./pycharm.sh
 
 
+创建一个SSH Key
+
+打开终端，输入：
+    ssh-keygen -t rsa -C "email"
+
+SSH Key 默认安装在 /home/qian/.ssh/ 中
+
+cd到.ssh/目录下有两个文件，
+ 用gedit打开id_rsa.pub
+    gedit id_rsa.pub
+
+
+ create a new repository on the command line
+
+echo "# tips_of_computer" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:kungfuqian/tips_of_computer.git
+git push -u origin master
+
+
+or push an existing repository from the command line
+
+git remote add origin git@github.com:kungfuqian/tips_of_computer.git
+git push -u origin master
 
 
 ##############################
