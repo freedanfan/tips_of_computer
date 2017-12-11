@@ -544,6 +544,47 @@ MATLAB启动程序默认会安装到/usr/local/MATLAB/bin目录中，由于系�
 用户权限不填，表示全部用户可用；gcc不填
 
 
+### install liblinear ###
+download liblinear: https://github.com/cjlin1/liblinear
+download libSVM: https://github.com/cjlin1/libsvm
+download gcc 4.9.x: http://ftp.gnu.org/gnu/gcc/gcc-4.9.2/
+
+firstly, install gcc
+    1.下载GCC源码：
+    wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.gz
+    2.解压：
+    tar -zxvf gcc-5.3.0.tar.gz
+    3.下载编译所需依赖项：
+    cd gcc-5.3.0                    //进入解包后的gcc文件夹
+    ./contrib/download_prerequisites                  //下载依赖项
+    cd ..                          //返回上层目录
+    4.建立编译输出目录：
+    mkdir gcc-build-4.9.2
+    5.进入输出目录，执行以下命令，并生成makefile文件：
+    cd gcc-build-5.3.0
+    ../gcc-5.3.0/configure --enable-checking=release --enable-languages=c,c++ --disable-multilib
+    6.编译：
+    make -j4接下来就是等待了，整个过程大约40分钟左右。PS：最好不要在编译过程中再去做别的什么事，整个过程CPU都是满载的，要是莫名终止了，后面麻烦事也不少。
+    7.安装：
+    编译结束以后，我们就可以执行安装了：
+    sudo make install
+    8.检查版本：
+    gcc --version
+    g++ --version
+
+secondly, install liblinear
+    cd /liblinear/matlab
+    On Unix systems, if neither make.m nor 'mex -setup' works, please use
+Makefile and type 'make' in a command window. Note that we assume
+your MATLAB is installed in '/usr/local/matlab'. If not, please change
+MATLABDIR in Makefile.
+
+thirdly, install libSVM
+    cd /libsvm/matlab
+    On Unix systems, if neither make.m nor 'mex -setup' works, please use
+Makefile and type 'make' in a command window. Note that we assume
+your MATLAB is installed in '/usr/local/matlab'. If not, please change
+MATLABDIR in Makefile.
 
 
 
