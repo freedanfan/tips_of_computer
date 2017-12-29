@@ -242,7 +242,7 @@ download  cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
 
 # https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=debnetwork
 
-
+#  安装 CUDA-9.0
 `sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb`
 `sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub`
 `sudo apt-get update`
@@ -585,6 +585,46 @@ thirdly, install libSVM
 Makefile and type 'make' in a command window. Note that we assume
 your MATLAB is installed in '/usr/local/matlab'. If not, please change
 MATLABDIR in Makefile.
+
+
+
+
+
+#################################################
+## initial MatConvNet
+#################################################
+
+http://www.vlfeat.org/matconvnet/install/#compiling
+
+In order to install the library, follows these steps:
+
+    1. Download and unpack the library source code into a directory of your choice. Call the path to this directory <MatConvNet>.
+    2. Compile the library.
+    3. Start MATLAB and type:
+
+        > run <MatConvNet>/matlab/vl_setupnn
+
+        in order to add MatConvNet to MATLAB's search path
+
+2.1 Compiling the GPU support
+        you can also use the 'gpuDevice' MATLAB command to find out MATLAB's version of the CUDA toolkit.
+        Assuming that there is only a single copy of the CUDA toolkit installed in your system and
+    that it matches MATLAB's version, compile the library with:
+            > vl_compilenn('enableGpu', true)
+
+2.2 Compiling the cuDNN support
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
