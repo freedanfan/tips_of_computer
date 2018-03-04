@@ -1,0 +1,14 @@
+打开/usr/share/applications 
+找到你需要固定到桌面的程序，在其上单击右键–》复制到 
+在弹出窗里选择桌面  打开/usr/share/applications可以看到所有的应用程序了
+
+制作快速访问入口 
+方法一 
+打开/usr/share/applications 
+鼠标移到屏幕左上角，看到“书签”，点击–》“将该位置加入书签” 
+下次打开文件时，在文件左边书签下就可以看到applications了
+
+方法二 
+打开/usr/share/applications 
+找到你需要固定到桌面的程序，在其上单击右键–》复制到 
+在弹出窗里选择桌面
