@@ -364,7 +364,18 @@ Enter the following to install Anaconda for Python 3.6:
 open Terminal window and tpye:
    anaconda-navigator
 
+##############################
+     uninstall Anaconda3
+##############################
+1.到根目录下，打开终端并输入： 
+sudo gedit ~/.bashrc
 
+2.在.bashrc文件末尾用#号注释掉之前添加的路径(或直接删除)： 
+#export PATH=/home/lq/anaconda3/bin:$PATH 
+保存并关闭文件
+
+3.使其立即生效，在终端执行： 
+source ~/.bashrc
 
 ##############################
 install tensorflow from source
