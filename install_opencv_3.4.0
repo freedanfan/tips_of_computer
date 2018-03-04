@@ -1,0 +1,66 @@
+
+##########################
+install anaconda and run
+##########################
+# ignored insatall anaconda 
+# open anaconda navigator
+anaconda-navigator
+
+# build environment,next open the environment with terminal 
+
+##########################
+update ubuntu
+##########################
+sudo apt-get update && sudo apt-get dist-upgrade && sudo apt-get autoremove
+
+##########################
+Installing all the recommended packages
+##########################
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install libxvidcore-dev libx264-dev
+sudo apt-get install libgtk-3-dev
+sudo apt-get install libatlas-base-dev gfortran
+sudo apt-get install python2.7-dev python3.5-dev
+sudo apt-get install libatlas-base-dev gfortran pylint
+
+##########################
+Download OpenCV source
+##########################
+opencv official:     https://github.com/opencv/opencv_contrib
+opencv_contrib:       https://github.com/opencv/opencv_contrib
+
+opencv-3.4.0 download:            https://downloads.sourceforge.net/opencvlibrary/opencv-3.4.0.zip
+opencv_contrib-3.4.0 download:    https://github.com/opencv/opencv_contrib/archive/3.4.0/opencv_contrib-3.4.0.tar.gz
+
+##########################
+ Configuring and compiling
+##########################
+
+cd ~/opencv-3.4.0/
+mkdir build
+cd build
+sudo cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D INSTALL_C_EXAMPLES=OFF \
+      -D OPENCV_EXTRA_MODULES_PATH=/home/qian/Software/opencv/opencv_contrib-3.4.0/modules \
+      -D PYTHON_EXECUTABLE=/home/qian/Software/anaconda3/envs/tensorflow-gpu/bin/python3 \
+      -D BUILD_EXAMPLES=ON ..
+
+## OPENCV_EXTRA_MODULES_PATH: opencv的额外模块地址，选择绝对地址
+## PYTHON_EXECUTABLE: python的路径
+  
+make -j11
+
+
+sudo make install
+
+sudo ldconfig
+
+
+## 参考：
+https://medium.com/@debugvn/installing-opencv-3-3-0-on-ubuntu-16-04-lts-7db376f93961
+https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
