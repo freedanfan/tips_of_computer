@@ -142,6 +142,7 @@ sudo /etc/init.d gdm stop
 我这里是lightdm，不确定是哪个可以都试试，或是直接 init 3
 
 按Ctrl + Alt + F1 进入tty1控制台
+按Ctrl + Alt + F7 退出tty1控制台
 
 安装驱动
 
