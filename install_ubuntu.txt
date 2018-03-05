@@ -263,9 +263,12 @@ download  cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
 
 # https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=debnetwork
 
+
+
+
 #  安装 CUDA-9.0
 `sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb`
-`sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub`
+`sudo apt-key add /var/cuda_repo-<version>/7fa2af80.pub`
 `sudo apt-get update`
 `sudo apt-get install cuda`
 
@@ -275,17 +278,15 @@ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64\
                          ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export CUDA_HOME=/usr/local/cuda:$CUDA_HOME
 
-Environment Setup
+修改环境变量：在终端打开并修改.bashrc文件
+sudo gedit ~/.bashrc  
+将如下内容添加到.bashrc文件末尾：
+export CUDA_HOME=/usr/local/cuda-<version> 
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
+export  PATH=${CUDA_HOME}/bin:${PATH}
 
-To change the environment variables for 64-bit operating systems:
-
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64\
-                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-
-
-Read more at: http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ixzz50UNrCc9Y
-Follow us: @GPUComputing on Twitter | NVIDIA on Facebook
-
+修改完成后，在终端输入指令，使环境变量立即生效：
+sudo ldconfig
 
 
 ################################
