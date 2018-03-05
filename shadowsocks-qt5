@@ -1,0 +1,11 @@
+# 三个简单的指令简单安装shadowsocks-qt5
+
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+
+讲shadowsocks的图标添加到Ubuntu的桌面：
+
+打开/usr/share/applications 
+找到你需要固定到桌面的程序，在其上单击右键–》复制到 
+在弹出窗里选择桌面
