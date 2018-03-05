@@ -1,0 +1,32 @@
+virtualenv 、virtualenvwrapper的安装
+$ sudo pip install virtualenv virtualenvwrapper
+
+virtualenvwrapper的卸载
+$ sudo pip uninstall virtualenvwrapper
+
+Then we need to add some line to .bashrc file:
+$ cd ~
+$ nano .bashrc
+
+add the following lines to the bottom of the content of the file
+# virtualenv and virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+Then save the file, go back to terminal. Run this line:
+$ source ~/.bashrc
+
+Next, let’s create a virtual environment for OpenCV, called cv:
+$ mkvirtualenv cv -p python3
+
+If you restart or accidentally close the terminal, type the command below:
+$ workon cv
+
+If you want to close vitrunalenv,type the command below:
+$ deactivate
+
+若需要更改虚拟环境中python的版本，则需如下修改：
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6 # 这句是为了防止环境变量$PATH中已有其它环境的python
+export WORKON_HOME=$HOME/.virtualenvs    # 放所有虚拟环境的地方
+source /usr/local/bin/virtualenvwrapper.sh
+在终端输入source ~/.bashrc
