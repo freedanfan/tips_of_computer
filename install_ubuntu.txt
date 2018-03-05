@@ -139,10 +139,30 @@ sudo update-initramfs -u
 sudo /etc/init.d gdm stop
 
 
+
+
+
+
+
+
 我这里是lightdm，不确定是哪个可以都试试，或是直接 init 3
 
 按Ctrl + Alt + F1 进入tty1控制台
 按Ctrl + Alt + F7 退出tty1控制台
+
+按照以下方法安装NVidia显卡驱动之后，可能会出现不能进入tty1-6的问题（按ctrl+alt+f1黑屏）
+
+Google了一个解决方法
+https://askubuntu.com/questions/487868/no-tty-after-installing-nvidia-driver
+
+编辑/etc/default/grub
+
+修改GRUB_CMDLINE_LINUX_DEFAULT的值为nomodeset
+
+更新grub：sudo update-grub
+
+重启
+
 
 安装驱动
 
