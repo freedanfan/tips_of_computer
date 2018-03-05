@@ -171,6 +171,15 @@ https://askubuntu.com/questions/487868/no-tty-after-installing-nvidia-driver
 sudo sh ./NVIDIA-Linux-x86_64-367.57.run  或sudo sh ./NVIDIA*.run
 
   （如果安装不正常则带 --uninstall 参数卸载）
+  
+  -> There appears to already be a driver installed on your system (version: 390.25).  As part of installing this driver (version: 384.98), the existing driver will be uninstalled.  Are you sure you want to continue? (Answer: Continue installation)
+  
+  -> The distribution-provided pre-install script failed!  Are you sure you want to continue? (Answer: Continue installation)
+  
+  -> Would you like to register the kernel module sources with DKMS? This will allow DKMS to automatically build a new module, if you install a different kernel later. (Answer: No)
+  
+  -> Install NVIDIA's 32-bit compatibility libraries? (Answer: Yes)
+  -> Would you like to run the nvidia-xconfig utility to automatically update your X configuration file so that the NVIDIA X driver will be used when you restart X?  Any pre-existing X configuration file will be backed up. (Answer: Yes)
 
 安装完后重启X-window
 
