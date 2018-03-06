@@ -140,11 +140,6 @@ sudo /etc/init.d gdm stop
 
 
 
-
-
-
-
-
 我这里是lightdm，不确定是哪个可以都试试，或是直接 init 3
 
 按Ctrl + Alt + F1 进入tty1控制台
@@ -184,8 +179,6 @@ sudo sh ./NVIDIA-Linux-x86_64-367.57.run  或sudo sh ./NVIDIA*.run
 安装完后重启X-window
 
 
-按Ctrl + Alt + F7返回tty7图形界面
-
 检查
 
 
@@ -193,26 +186,24 @@ nvidia-smi  可显示显卡一些信息
 
 nvidia-settings  显卡设置
 
-
-1.按住CTRL+ALT+F1 进入命令行
-
-2.    sudo service lightdm stop    或者   sudo stop lightdm
-
-3.    sudo init 3
-
-4.  安装驱动程序：     ＃:  sudo    ./NVIDIA-Linux-x86_64-177.67-pkg2.run      //当前目录下执行NVIDIA驱动程序
-
-5.   按照提示安装完成，简单方法重启就好了     sudo  reboot
-
-
-进入 root 账户
-同时按键Ctrl、Alt和F2 键
-init 3
-找到NVIDIA-Linux-x86_64-295.53.run所在的文件夹
-
-然后输入 sh NVIDIA-Linux-x86-<version numbers>.run
-安装过程中根据相应提示，即可完成安装
-
+################################## 别的解决方法 ###########################
+##1.按住CTRL+ALT+F1 进入命令行
+##
+##2.    sudo service lightdm stop    或者   sudo stop lightdm
+##
+##3.    sudo init 3
+##
+##4.  安装驱动程序：     ＃:  sudo    ./NVIDIA-Linux-x86_64-177.67-pkg2.run      //当前目录下执行NVIDIA驱动程序
+##
+##5.   按照提示安装完成，简单方法重启就好了     sudo  reboot
+##进入 root 账户
+##同时按键Ctrl、Alt和F2 键
+##init 3
+##找到NVIDIA-Linux-x86_64-295.53.run所在的文件夹
+##
+##然后输入 sh NVIDIA-Linux-x86-<version numbers>.run
+##安装过程中根据相应提示，即可完成安装
+##########################################################################
 
 ################################
       系统备份还原
@@ -251,6 +242,16 @@ sudo apt-get install systemback
 ################################
   install nvidia CUDA
 ################################
+参考： http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+下载： http://developer.nvidia.com/cuda-downloads
+
+环境： Ubuntu 16.04 ：
+	kernel: 4.4.0-21-generic
+	GCC: 5.4.0
+	glibc: 2.23
+     + GTX 1070TI 
+
+
 https://github.com/mind/wheels
 gcc降版本
 ubuntu的gcc编译器是5.4.0，然而cuda8.0不支持5.0以上的编译器，因此需要降级，把编译器版本降到4.9：
@@ -275,9 +276,9 @@ download  cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
 
 
 
-#  安装 CUDA-9.0
-`sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb`
-`sudo apt-key add /var/cuda_repo-<version>/7fa2af80.pub`
+#  安装 CUDA-8.0
+`sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb`
+`sudo apt-key add /var/cuda_repo-<version>/7fa2af80.pub`         ## 到此文件夹下找到对应版本
 `sudo apt-get update`
 `sudo apt-get install cuda`
 
@@ -290,7 +291,7 @@ export CUDA_HOME=/usr/local/cuda:$CUDA_HOME
 修改环境变量：在终端打开并修改.bashrc文件
 sudo gedit ~/.bashrc  
 将如下内容添加到.bashrc文件末尾：
-export CUDA_HOME=/usr/local/cuda-<version> 
+export CUDA_HOME=/usr/local/cuda-<version>        # 找到对应版本
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
 export  PATH=${CUDA_HOME}/bin:${PATH}
 
@@ -302,44 +303,20 @@ sudo ldconfig
   install nvidia cuDNN
 ################################
 download 
-cuDNN v6.0 Runtime Library for Ubuntu16.04 (Deb)
+cuDNN v7.1 Runtime Library for Ubuntu16.04 (Deb)
 
-cuDNN v6.0 Developer Library for Ubuntu16.04 (Deb)
+cuDNN v7.1 Developer Library for Ubuntu16.04 (Deb)
 
-cuDNN v6.0 Code Samples and User Guide for Ubuntu16.04 (Deb)
+cuDNN v7.1 Code Samples and User Guide for Ubuntu16.04 (Deb)
 
 # https://developer.nvidia.com/rdp/cudnn-download
 # http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
 
+Installing from a Debian File
 
-
-    Navigate to your <cudnnpath> directory containing the cuDNN Tar file.
-    Unzip the cuDNN package.
-
-    $ tar -xzvf cudnn-9.0-linux-x64-v7.tgz
-
-    Copy the following files into the CUDA Toolkit directory.
-
-    $ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
-    $ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-    $ sudo chmod a+r /usr/local/cuda/include/cudnn.h
-    /usr/local/cuda/lib64/libcudnn*
-
-
-2.3.2. Installing from a Debian File
-
-    Navigate to your <cudnnpath> directory containing cuDNN Debian file.
-    Install the runtime library, for example:
-
-    libcudnn6_6.0.21-1+cuda8.0_amd64.deb
-
-    Install the developer library, for example:
-
-    sudo dpkg -i libcudnn6-dev_6.0.21-1+cuda8.0_amd64.deb
-
-    Install the code samples and the cuDNN Library User Guide, for example:
-
-    sudo dpkg -i libcudnn6-doc_6.0.21-1+cuda8.0_amd64.deb
+    sudo dpkg -i libcudnn7_7.1.1.5-1+cuda8.0_amd64.deb
+    sudo dpkg -i libcudnn7-dev_7.1.1.5-1+cuda8.0_amd64.deb
+    sudo dpkg -i libcudnn7-doc_7.1.1.5-1+cuda8.0_amd64.deb
 
 2.4. Verifying
 
