@@ -64,3 +64,53 @@ sudo ldconfig
 ## 参考：
 https://medium.com/@debugvn/installing-opencv-3-3-0-on-ubuntu-16-04-lts-7db376f93961
 https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
+
+发现安装的时候特别慢，主要是在下载第三方的文件，有一个技巧，即先翻墙下载好第三方的文件，
+然后放在opencv-3.4.0文件目录的.cache文件夹中，结构格式如下面这个网站
+              http://download.csdn.net/download/u010342901/10173967
+下载第三方的文件目录： https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=opencv-gstreamer
+用shell脚本提取其中的地址。
+
+这边我提供了自己的脚本，可以直接提取地址，将脚本保存成download.3rdpart.sh。然后添加执行权限，./download.3rdpart.sh即可。
+
+shell脚本如下：
+#!/bin/bash
+echo "usage ： chmod +x download_3rdpart.sh"
+echo " ./download.3rdpart.sh"
+touch 提取网站.txt
+
+_srcname=opencv
+_ippicv_ver='2017u3'
+_ippicv_date='20170822'
+_tinydnn_ver='1.0.0a3'
+_dnn_face_detector_file='res10_300x300_ssd_iter_140000.caffemodel'
+_ippicv_commit='dfe3162c237af211e98b8960018b564bc209261d'
+_bootdesc_commit='34e4206aef44d50e6bbcd0ab06354b52e7466d26'
+_vgg_commit='fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d'
+_dnn_face_detector_commit='b2bfc75f6aea5b1f834ff0f0b865a7c18ff1459f'
+_face_landmakr_model_commit='8afa57abc8229d611c4937165d20e2a2d9fc5a12'
+
+pkgname=opencv-gstreamer
+pkgver=3.4.0
+pkgrel=1
+pkgdesc='Open Source Computer Vision Library (no Xine/FFmpeg dependency, uses GStreamer)'
+arch=('i686' 'x86_64')
+
+echo 	"https://github.com/opencv/opencv/archive/${pkgver}.tar.gz"  > pachong.txt
+echo    "https://github.com/opencv/opencv_contrib/archive/${pkgver}.tar.gz"  >> pachong.txt
+echo    "https://github.com/tiny-dnn/tiny-dnn/archive/v${_tinydnn_ver}.tar.gz"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_dnn_face_detector_commit}/${_dnn_face_detector_file}"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_face_landmakr_model_commit}/face_landmark_model.dat"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_bgm.i"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_bgm_bi.i"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_bgm_hd.i"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_binboost_064.i"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_binboost_128.i"  >> pachong.txt
+echo     "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_binboost_256.i"  >> pachong.txt
+echo        "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_bootdesc_commit}/boostdesc_lbgm.i"  >> pachong.txt
+echo        "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_vgg_commit}/vgg_generated_48.i"  >> pachong.txt
+echo        "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_vgg_commit}/vgg_generated_64.i"  >> pachong.txt
+echo        "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_vgg_commit}/vgg_generated_80.i"  >> pachong.txt
+echo        "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${_vgg_commit}/vgg_generated_120.i" >> pachong.txt
+
+echo source_x86_64="https://github.com/opencv/opencv_3rdparty/raw/${_ippicv_commit}/ippicv/ippicv_${_ippicv_ver}_lnx_intel64_general_${_ippicv_date}.tgz" >> pachong.txt
