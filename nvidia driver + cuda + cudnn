@@ -1,0 +1,123 @@
+
+################################
+  install nvidia driver
+################################
+先到NVIDIA 官网上下载驱动文件（.run 格式）
+http://www.nvidia.cn/Download/index.aspx?lang=cn
+
+卸载已存在驱动版本
+sudo apt-get remove --purge nvidia*
+
+
+执行uname -r，查看Linux核心，比如我的结果是4.4.0-45-generic
+
+更新Linux基础包和核心，执行
+sudo apt-get install build-essential pkg-config xserver-xorg-dev linux-headers-<version>-generic
+
+屏蔽开源驱动nouveau
+安装过程会询问是否屏蔽，手动屏蔽也有多种操作方式，如通过blacklist.conf或Grub2。这里选择blacklist：
+
+创建新文件：
+sudo apt-get install vim
+sudo vim /etc/modprobe.d/blacklist-nouveau.conf
+
+内容为
+blacklist nouveau
+options nouveau modeset=0
+
+再更新
+sudo update-initramfs -u
+
+结束X-window服务
+init 3  
+
+按Ctrl + Alt + F1 进入tty1控制台
+按Ctrl + Alt + F7 退出tty1控制台
+
+按照以上方法安装NVidia显卡驱动之后，可能会出现不能进入tty1-6的问题（按ctrl+alt+f1黑屏）
+
+Google了一个解决方法
+https://askubuntu.com/questions/487868/no-tty-after-installing-nvidia-driver
+
+编辑/etc/default/grub
+
+修改GRUB_CMDLINE_LINUX_DEFAULT的值为nomodeset
+
+更新grub：sudo update-grub
+
+重启
+
+安装驱动
+执行驱动安装的run文件
+sudo sh ./NVIDIA-Linux-x86_64-367.57.run  或sudo sh ./NVIDIA*.run
+  （如果安装不正常则带 --uninstall 参数卸载）
+  (安装中出现的问题，回答)
+  -> There appears to already be a driver installed on your system (version: 390.25).  
+     As part of installing this driver (version: 384.98), the existing driver will be uninstalled.  
+     Are you sure you want to continue? (Answer: Continue installation)
+  
+  -> The distribution-provided pre-install script failed!  
+     Are you sure you want to continue? (Answer: Continue installation)
+  
+  -> Would you like to register the kernel module sources with DKMS? 
+     This will allow DKMS to automatically build a new module, if you install a different kernel later. (Answer: No)
+  
+  -> Install NVIDIA's 32-bit compatibility libraries? (Answer: Yes)
+  
+  -> Would you like to run the nvidia-xconfig utility to automatically update your 
+     X configuration file so that the NVIDIA X driver will be used when you restart X?  
+     Any pre-existing X configuration file will be backed up. (Answer: Yes)
+
+安装完后重启
+
+检查
+nvidia-smi  可显示显卡一些信息
+nvidia-settings 显卡设置
+
+################################## 别的解决方法 ###########################
+##1.按住CTRL+ALT+F1 进入命令行
+##
+##2.    sudo service lightdm stop    或者   sudo stop lightdm
+##
+##3.    sudo init 3
+##
+##4.  安装驱动程序：     ＃:  sudo    ./NVIDIA-Linux-x86_64-177.67-pkg2.run    //当前目录下执行NVIDIA驱动程序
+##
+##5.   按照提示安装完成，简单方法重启就好了     sudo  reboot
+##进入 root 账户
+##同时按键Ctrl、Alt和F2 键
+##init 3
+##找到NVIDIA-Linux-x86_64-295.53.run所在的文件夹
+##
+##然后输入 sh NVIDIA-Linux-x86-<version numbers>.run
+##安装过程中根据相应提示，即可完成安装
+##########################################################################
+
+
+
+################################
+  install nvidia CUDA
+################################
+参考： http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+下载： http://developer.nvidia.com/cuda-downloads
+
+环境： Ubuntu 16.04 ：
+	kernel: 4.4.0-21-generic
+	GCC: 5.4.0
+	glibc: 2.23
+     + GTX 1070TI 
+     
+download cuda:  cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+# https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=debnetwork
+
+#  安装 CUDA-9.1
+sudo dpkg -i cuda-repo-ubuntu1604-9-1-local_9.1.85-1_amd64.deb
+sudo apt-key add /var/cuda_repo-<version>/7fa2af80.pub         ## 到此文件夹下找到对应版本
+sudo apt-get update
+sudo apt-get install cuda
+
+
+
+
+卸载
+sudo dpkg -r libcudnn7 libcudnn7-dev libcudnn7-doc
