@@ -1,0 +1,11 @@
+非常有用的清理命令：
+sudo apt-get autoclean                清理旧版本的软件缓存
+sudo apt-get clean                    清理所有软件缓存
+sudo apt-get autoremove             删除系统不再使用的孤立软件
+这三个命令主要清理升级缓存以及无用包的。
+
+
+ubuntu 显示隐藏文件
+方法一、使用命令ls -a显示所有的文件，包括隐藏文件
+方法二、在桌面化操作时，在文件夹下，按下ctrl+h，即可显示所有的文件。
+
