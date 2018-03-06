@@ -1,11 +1,26 @@
-非常有用的清理命令：
-sudo apt-get autoclean                清理旧版本的软件缓存
-sudo apt-get clean                    清理所有软件缓存
-sudo apt-get autoremove             删除系统不再使用的孤立软件
-这三个命令主要清理升级缓存以及无用包的。
+1. 非常有用的清理命令：
+    sudo apt-get autoclean                清理旧版本的软件缓存
+    sudo apt-get clean                    清理所有软件缓存
+    sudo apt-get autoremove             删除系统不再使用的孤立软件
+    这三个命令主要清理升级缓存以及无用包的。
 
 
-ubuntu 显示隐藏文件
-方法一、使用命令ls -a显示所有的文件，包括隐藏文件
-方法二、在桌面化操作时，在文件夹下，按下ctrl+h，即可显示所有的文件。
+2. ubuntu 显示隐藏文件
+    方法一、使用命令ls -a显示所有的文件，包括隐藏文件
+    方法二、在桌面化操作时，在文件夹下，按下ctrl+h，即可显示所有的文件。
 
+3. ubuntu 应用程序显示到桌面
+    打开/usr/share/applications 
+    找到你需要固定到桌面的程序，在其上单击右键–》复制到 
+    在弹出窗里选择桌面  打开/usr/share/applications可以看到所有的应用程序了
+
+    制作快速访问入口 
+    方法一 
+    打开/usr/share/applications 
+    鼠标移到屏幕左上角，看到“书签”，点击–》“将该位置加入书签” 
+    下次打开文件时，在文件左边书签下就可以看到applications了
+
+    方法二 
+    打开/usr/share/applications 
+    找到你需要固定到桌面的程序，在其上单击右键–》复制到 
+    在弹出窗里选择桌面
