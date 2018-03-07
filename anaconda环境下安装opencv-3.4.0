@@ -1,0 +1,55 @@
+ 背景
+
+最近在做视频的物体追踪，要用到视频读取函数和Tracker类，在pip和 conda安装的cv2中都没有,比如调用cv2.imshow()时有时会出现：
+Thefunction is not implemented. Rebuild the library with Windows, GTK+ 2.x orCarbon support. 
+If you are on Ubuntu or Debian, install libgtk2.0‑dev and pkg‑config, then re‑runcmake or configure script
+这就是网上编译好的opencv包在编译的过程中设置的选项可能和你当前需求不一样，解决方法就是自己编译安装Opencv到anaconda中。
+
+
+首先 安装 anaconda，这里不赘述
+
+安装cmake-gui
+sudo apt install cmake-gui
+
+运行anaconda中的虚拟环境，运行
+sudo apt-get update && sudo apt-get dist-upgrade && sudo apt-get autoremove
+
+运行本库中的dependencies.sh，安装依赖项 
+chmod +x dependencies.sh
+./dependencies.sh
+
+安装numpy
+pip install numpy
+
+解压opencv-3.4.0.zip和opencv_contrib-3.4.0.zip
+cd opencv-3.4.0
+mkdir build 
+cd build
+cmake-gui 或 cmake
+
+进入cmake的GUI界面，选择source code的路径，和build的路径,点击configure，
+默认编译文件和编译器 unix makefiles,use default native compilers
+参数如下： 
+
+cmake前4个参数需要自己手动调节
+
+cmake  -D CMAKE_BUILD_TYPE=Release \
+-D PYTHON_LIBRARY=/home/amax/anaconda3/envs/rootclone/lib/libpython3.5m.so ..  \
+-D OPENCV_EXTRA_MODULES_PATH=/home/amax/Downloads/opencv/opencv_contrib-3.3.1/modules  \
+-D CMAKE_LIBRARY_PATH=/usr/local/cuda-*/lib64/stubs  \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D INSTALL_C_EXAMPLES=OFF \
+-D BUILD_EXAMPLES=ON \
+-D CMAKE_LIBRARY_PATH=/usr/local/cuda-*/lib64/stubs  \
+-D WITH_CUDA=ON  \
+-D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)")  \
+-D PYTHON3_EXECUTABLE=$(which python) \
+-D PYTHON3_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
+-D PYTHON3PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
+-D PYTHON3_NUMPY_INCLUDE_DIRS=$(python -c "import numpy; import os; print(os.path.join(numpy.__path__[0], 'core', 'include'))") \
+
+编译和安装
+make -j11
+sudo make install
+sudo ldconfig
+
