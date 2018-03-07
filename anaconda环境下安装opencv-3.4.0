@@ -31,18 +31,18 @@ cmake-gui 或 cmake
 默认编译文件和编译器 unix makefiles,use default native compilers
 参数如下： 
 
-cmake前4个参数需要自己手动调节
+cmake前5个参数需要自己手动调节
 
 cmake  -D CMAKE_BUILD_TYPE=Release \
--D PYTHON_LIBRARY=/home/amax/anaconda3/envs/rootclone/lib/libpython3.5m.so ..  \
+-D PYTHON3_LIBRARY=/home/amax/anaconda3/envs/rootclone/lib/libpython3.5m.so ..  \
 -D OPENCV_EXTRA_MODULES_PATH=/home/amax/Downloads/opencv/opencv_contrib-3.3.1/modules  \
 -D CMAKE_LIBRARY_PATH=/usr/local/cuda-*/lib64/stubs  \
+-D CMAKE_INSTALL_PREFIX=/home/qian/software/anaconda3/envs/tensorflow_gpu/opencv_install_prefix \
 -D INSTALL_PYTHON_EXAMPLES=ON \
 -D INSTALL_C_EXAMPLES=OFF \
 -D BUILD_EXAMPLES=ON \
 -D CMAKE_LIBRARY_PATH=/usr/local/cuda-*/lib64/stubs  \
 -D WITH_CUDA=ON  \
--D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)")  \
 -D PYTHON3_EXECUTABLE=$(which python) \
 -D PYTHON3_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
 -D PYTHON3PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
