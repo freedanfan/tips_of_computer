@@ -15,9 +15,17 @@ $ conda install opencv
 Thefunction is not implemented. Rebuild the library with Windows, GTK+ 2.x orCarbon support. 
 If you are on Ubuntu or Debian, install libgtk2.0‑dev and pkg‑config, then re‑runcmake or configure script
 这就是网上编译好的opencv包在编译的过程中设置的选项可能和你当前需求不一样，解决方法就是自己编译安装opencv
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+安装之前，先确保没有opencv残余，
+卸载opencv
+
+sudo make uninstall
+cd ..
+sudo rm -r build
+sudo rm -r /usr/local/include/opencv2 /usr/local/include/opencv /usr/include/opencv /usr/include/opencv2 /usr/local/share/opencv /usr/local/share/OpenCV /usr/share/opencv /usr/share/OpenCV /usr/local/bin/opencv* /usr/local/lib/libopencv*
 
 2. Ubuntu下anaconda卸载opencv
-安装前首先把之前的opencv卸载掉，conda install装的就用condauninstall卸，其他的安装方式也按照对应方式卸载就可以了.
+安装前首先把之前的opencv卸载掉，conda install装的就用conda uninstall卸，其他的安装方式也按照对应方式卸载就可以了.
 然后
 $ cd /usr/local/lib
 $ sudo rm–r opencv相关的包
