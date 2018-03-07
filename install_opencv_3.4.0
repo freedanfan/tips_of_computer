@@ -1,3 +1,30 @@
+编译好的opencv和自己编译安装opencv的区别
+
+Ubuntu安装了anaconda以后，
+$ conda install opencv
+直接安装网上编译好的opencv，但是Ubuntu，python以及opencv不同版本之间使用都有差异，容易出问题；但是如果没出问题的话，这确实是最简单的安装方式.
+
+$ pip install opencv-python
+或者$ apt-get install python-opencv
+或者$ conda install –c https://conda.binstar.org/menpoopencv
+
+具有同样问题，所以有的人选择自己编译安装opencv.
+比如直接
+$ conda install opencv
+之后，调用cv2.destroyAllWindows()时有时会出现：
+Thefunction is not implemented. Rebuild the library with Windows, GTK+ 2.x orCarbon support. 
+If you are on Ubuntu or Debian, install libgtk2.0‑dev and pkg‑config, then re‑runcmake or configure script
+这就是网上编译好的opencv包在编译的过程中设置的选项可能和你当前需求不一样，解决方法就是自己编译安装opencv
+
+2. Ubuntu下anaconda卸载opencv
+安装前首先把之前的opencv卸载掉，conda install装的就用condauninstall卸，其他的安装方式也按照对应方式卸载就可以了.
+然后
+$ cd /usr/local/lib
+$ sudo rm–r opencv相关的包
+$ cd /usr/local/include
+$ sudo rm–r opencv相关的包
+看看/usr/local/下有没有其他opencv，有的话一并删除
+删除一系列包可以用rm –r opencv*，以opencv开头的包就都会被删掉
 
 ##########################
 install anaconda and run
