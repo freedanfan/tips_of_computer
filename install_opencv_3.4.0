@@ -85,7 +85,8 @@ sudo cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D PYTHON_EXECUTABLE=/home/qian/Software/anaconda3/envs/tensorflow-gpu/bin/python3 \
       -D BUILD_EXAMPLES=ON ..
 
-## OPENCV_EXTRA_MODULES_PATH: opencv的额外模块地址，选择绝对地址
+## OPENCV_EXTRA_MODULES_PATH: opencv的额外模块地址，必须选择绝对地址，否则会出现错误：Compiling OpenCV 3.3 : C++11 is not supported
+
 ## PYTHON_EXECUTABLE: python的路径
   
 make -j11
