@@ -34,7 +34,7 @@ cmake-gui 或 cmake
 cmake前5个参数需要自己手动调节
 
 cmake  -D CMAKE_BUILD_TYPE=Release \
--D PYTHON3_LIBRARY=/home/amax/anaconda3/envs/rootclone/lib/libpython3.5m.so ..  \
+-D PYTHON3_LIBRARY=/home/amax/anaconda3/envs/rootclone/lib/libpython3.5m.so  \
 -D OPENCV_EXTRA_MODULES_PATH=/home/amax/Downloads/opencv/opencv_contrib-3.3.1/modules  \
 -D CMAKE_LIBRARY_PATH=/usr/local/cuda-*/lib64/stubs  \
 -D CMAKE_INSTALL_PREFIX=/home/qian/software/anaconda3/envs/tensorflow_gpu/opencv_install_prefix \
@@ -46,7 +46,7 @@ cmake  -D CMAKE_BUILD_TYPE=Release \
 -D PYTHON3_EXECUTABLE=$(which python) \
 -D PYTHON3_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
 -D PYTHON3PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
--D PYTHON3_NUMPY_INCLUDE_DIRS=$(python -c "import numpy; import os; print(os.path.join(numpy.__path__[0], 'core', 'include'))") \
+-D PYTHON3_NUMPY_INCLUDE_DIRS=$(python -c "import numpy; import os; print(os.path.join(numpy.__path__[0], 'core', 'include'))") .. 
 
 编译和安装
 make -j11
