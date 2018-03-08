@@ -19,7 +19,16 @@ echo 'cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb '
 echo 'cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb'
 echo 'cudnn-9.0-linux-x64-v7.tgz'
 echo 'torch-0.3.1-cp35-cp35m-linux_x86_64 .whl'
-echo '解压后的opencv-3.4.0 和 opencv_contrib-3.4.0'
+echo 'opencv-3.4.0.zip'
+echo 'opencv_contrib-3.4.0'
+
+下载链接：
+torch： http://download.pytorch.org/whl/cu90/torch-0.3.1-cp35-cp35m-linux_x86_64.whl
+cuda-9.0 ： https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+cuda-patch_1 ： https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb
+cudnn-9.0-v7 ： https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.0_20180214/cudnn-9.0-linux-x64-v7.1
+opencv-3.4.0 ： https://github.com/opencv/opencv/archive/3.4.0.zip
+opencv_contrib-3.4.0 ： https://github.com/opencv/opencv_contrib/archive/3.4.0/opencv_contrib-3.4.0.tar.gz
 
 '''
 为了安装速度快些，到opencv-3.4.0文件夹中新建 ".cache" 文件夹，把第三方软件提前的放进去，结构和名称参考：http://download.csdn.net/download/u010342901/10173967
