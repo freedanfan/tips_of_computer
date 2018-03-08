@@ -213,7 +213,7 @@ find /usr/local/lib/ -type f -name "cv2*.so"
 
 ############ For Python 3 ############
 cd ~/.virtualenvs/virtual-py3/lib/python3.5/site-packages
-ln -s /usr/local/lib/python3.5/dist-packages/cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
+ln -s /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
 
 echo "<-----install finished! enjoy it.----->"
 
