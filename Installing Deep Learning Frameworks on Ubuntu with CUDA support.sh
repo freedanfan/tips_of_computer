@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 'We will install CUDA-9.0, cuDNN-9.0-v7, Python 2, Python 3, TensorFlow, Theano, Keras, Pytorch, OpenCV, Dlib along with other Python Machine Learning libraries step-by-step.'
-echo '\n'
-echo '\n'
+echo ''
+echo ''
 
 echo '''
 Processor : Intel core i7-5820k with 6 cores and 40 PCIe lines
@@ -9,12 +9,16 @@ Motherboard : 华硕 X99A – SLI
 RAM : 32 GB
 Graphics Card : Zotac GeForce GTX 1070 Ti with 8 GB RAM
 OS: Ubuntu 16.04 
-
 '''
+
+echo "主要参考：https://www.learnopencv.com/installing-deep-learning-frameworks-on-ubuntu-with-cuda-support/"
+
+
 echo '请将一下文件放在同目录中：'
 echo 'cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb '
 echo 'cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb'
 echo 'cudnn-9.0-linux-x64-v7.tgz'
+echo 'torch-0.3.1-cp35-cp35m-linux_x86_64 .whl'
 echo '解压后的opencv-3.4.0 和 opencv_contrib-3.4.0'
 
 '''
@@ -80,8 +84,8 @@ opencv3.3.1 CMake需下载的.cache文件夹
 set -e
 
 echo "<-----step 1 : install prerequisites ----->"
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 sudo apt-get install -y build-essential cmake gfortran git pkg-config 
 sudo apt-get install -y python-dev software-properties-common wget vim
@@ -89,7 +93,7 @@ sudo apt-get autoremove
 
 echo "<-----step 2 : install cuda ----->"
 sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
-sudo apt-key add /var/cuda-repo-<version>/7fa2af80.pub
+sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 sudo apt-get update
 sudo apt-get install cuda
 echo "<-----step 2.2 : install cuda_patch ----->"
@@ -103,6 +107,10 @@ echo "<-----step 3 : install cuDNN----->"
 tar xvf cudnn-9.0-linux-x64-v7.tgz
 sudo cp -P cuda/lib64/* /usr/local/cuda/lib64/
 sudo cp cuda/include/* /usr/local/cuda/include/
+
+echo "<-----step 3.1 : 查看cuda 和 cudnn 的版本----->"
+cat  /usr/local/cuda/version.txt 
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
 
 echo "<-----step 3.2 : update the paths----->"
 echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"' >> ~/.bashrc
@@ -136,30 +144,13 @@ mkvirtualenv virtual-py3 -p python3
  
 pip install numpy scipy matplotlib scikit-image scikit-learn ipython protobuf jupyter
 
-pip install tensorflow-gpu 
+pip install tensorflow-gpu  
  
 pip install Theano 
 pip install keras
-pip3 install http://download.pytorch.org/whl/cu90/torch-0.3.1-cp35-cp35m-linux_x86_64.whl 
+pip3 install torch-0.3.1-cp35-cp35m-linux_x86_64.whl 
 pip3 install torchvision
 pip install dlib
- 
-deactivate
-
-workon virtual-py3
-python
-import numpy
-numpy.__version__
-import theano
-theano.__version__
-import tensorflow
-tensorflow.__version__
-import keras
-keras.__version__
-import torch
-torch.__version__
-import cv2
-cv2.__version__
 
 echo "<-----step 6 : Install OpenCV 3.4----->"
 echo "<-----step 6.1 : install the dependencies----->"
@@ -167,8 +158,6 @@ sudo apt-get remove x264 libx264-dev
 sudo apt-get install -y checkinstall yasm
 sudo apt-get install -y libjpeg8-dev libjasper-dev libpng12-dev
  
-# If you are using Ubuntu 14.04
-sudo apt-get install -y libtiff4-dev
  
 # If you are using Ubuntu 16.04
 sudo apt-get install -y libtiff5-dev
@@ -183,7 +172,7 @@ sudo apt-get install -y libopencore-amrnb-dev libopencore-amrwb-dev
 sudo apt-get install -y x264 v4l-utils
 
 echo "<-----step 6.2 : Configure and generate the MakeFile----->"
-cd opencv
+cd opencv-3.4.0
 mkdir build
 cd build
 
@@ -197,7 +186,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_QT=ON \
       -D WITH_OPENGL=ON \
       -D WITH_CUDA=ON \
-      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.0/modules \
       -D BUILD_EXAMPLES=ON ..
 
 make -j10
