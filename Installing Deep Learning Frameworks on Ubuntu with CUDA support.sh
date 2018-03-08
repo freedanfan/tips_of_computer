@@ -172,6 +172,9 @@ sudo apt-get install -y libopencore-amrnb-dev libopencore-amrwb-dev
 sudo apt-get install -y x264 v4l-utils
 
 echo "<-----step 6.2 : Configure and generate the MakeFile----->"
+sudo apt-get install -y zip
+unzip opencv-3.4.0.zip  
+unzip opencv_contrib-3.4.0.zip
 cd opencv-3.4.0
 mkdir build
 cd build
