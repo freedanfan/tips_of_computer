@@ -20,7 +20,8 @@ echo 'cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb'
 echo 'cudnn-9.0-linux-x64-v7.tgz'
 echo 'torch-0.3.1-cp35-cp35m-linux_x86_64 .whl'
 echo 'opencv-3.4.0.zip'
-echo 'opencv_contrib-3.4.0'
+echo 'opencv_contrib-3.4.0.zip'
+echo 'pycharm-community-2017.3.4.tar.gz'
 
 '''
 下载链接：
@@ -30,6 +31,7 @@ cuda-patch_1 ： https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cu
 cudnn-9.0-v7 ： https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.0_20180214/cudnn-9.0-linux-x64-v7.1
 opencv-3.4.0 ： https://github.com/opencv/opencv/archive/3.4.0.zip
 opencv_contrib-3.4.0 ： https://github.com/opencv/opencv_contrib/archive/3.4.0/opencv_contrib-3.4.0.tar.gz
+pycharm-community-2017.3.4: https://download-cf.jetbrains.com/python/pycharm-community-2017.3.4.tar.gz
 '''
 
 '''
@@ -218,3 +220,11 @@ ln -s /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so
 echo "<-----install finished! enjoy it.----->"
 
 
+echo "<-----install pycharm!----->"
+tar -zxvf pycharm-community-2017.3.4.tar.gz
+cd pycharm-community-2017.3.4/bin/
+
+echo "<-----手动安装 pycharm!----->"
+./pycharm.sh
+
+echo "<-----Ubuntu deep learning environment done!----->"
