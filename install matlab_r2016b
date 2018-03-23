@@ -63,3 +63,7 @@ MATLAB启动程序默认会安装到/usr/local/MATLAB/bin目录中，由于系�
     sudo ln -s /usr/local/MATLAB/R2016b/bin/matlab   /usr/local/bin/matlab
 之后在命令行中直接输入matlab即可启动Matlab应用。
 
+
+取消磁盘挂载：
+umount /media/qian/study/ubuntu_install/ubuntu_software/matlab/matlab2016/R2016b_glnxa64_dvd*.iso
+
