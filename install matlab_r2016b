@@ -1,0 +1,65 @@
+
+##############################
+     install matlab
+##############################
+
+sudo apt install rar
+
+在终端执行rar x MATHWORKS_R2016b.part1.rar（执行过程中part2也会被解压），解压后就会得到MATHWORKS_R2016b.iso文件。
+
+
+mkdir /home/qian/Matlab  
+sudo mount -t auto -o loop /home/qian/R2016b_glnxa64_dvd1.iso /home/qian/Matlab 
+
+sudo /home/qian/Matlab/install 
+注意，运行该命令的时候，终端不能处在/home/<user name>/Matlab目录底下，否则安装过程会被终止。
+注意，安装过程中用的全部都是绝对路径。
+
+I offer two modes of installation:
+
+1) standalone:
+- Install choosing the option "Use a File Installation Key" and supply the following FIK
+	09806-07443-53955-64350-21751-41297
+- To install Matlab Production Server,using this
+	40236-45817-26714-51426-39281
+- Use license_standalone.lic to activate,
+  or make a "licenses" folder in %installdir% and copy license_standalone.lic to it,and run matlab without activation
+- after the installation finishes copy the folders to %installdir% to overwriting the originally installed files
+
+2) floating license (network license server):
+- Install choosing the option "Use a File Installation Key" and supply the following FIK
+	31095-30030-55416-47440-21946-54205
+- To install Matlab Production Server,using this
+	57726-51709-20682-42954-31195
+- Use license_server.lic when asked
+- after the installation finishes copy the folders to %installdir% to overwriting the originally installed files
+
+在安装过程进行到75%时（不同的机器和Matlab版本可能会略有不同），安装界面会弹出提示，要求插入*dvd2.iso，
+此时，我们重新打开一个终端，一定要重新打开一个终端！键入如下命令（同*dvd1.iso的挂载命令类似）：
+
+sudo mount -t auto -o loop  /home/qian/R2016b_glnxa64_dvd2.iso /home/qian/Matlab  
+
+软件默认安装到 /usr/local/MATLAB/R2016b
+
+sudo mkdir licenses
+将破解软件 crack 复制到license此目录
+
+
+
+之后进入crack文件夹将libmwservices.so复制到/usr/local/MATLAB/R2014a/bin/glnxa64中：
+sudo cp libmwservices.so /usr/local/MATLAB/R2014a/bin/glnxa64/libmwservices.so
+
+至此matlab激活彻底完成，开始运行matlab：
+cd bin/
+
+./matlab
+
+
+命令行任意位置启动matlab：
+
+MATLAB启动程序默认会安装到/usr/local/MATLAB/bin目录中，由于系统默认不会将该目录加入PATH环境
+变量，因此，直接 在终端输入matlab命令将不会启动，解决方法非常简单:一种是将该路径加入到PATH中，
+另一种就是在/usr/loca/bin里建一个符号链接。 这里选择后者:
+    sudo ln -s /usr/local/MATLAB/R2016b/bin/matlab   /usr/local/bin/matlab
+之后在命令行中直接输入matlab即可启动Matlab应用。
+
