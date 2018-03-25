@@ -1,0 +1,8 @@
+1. 首先到xmind官网上下载 www.xmind.net ,本版本采用Linux
+xmind-8-update7-linux.zip
+
+2. 解压文件夹，运行 ./setup.sh
+
+3. 进入“XMind_amd64”文件夹，双击XMind，运行Xmind
+
+4. 首先屏蔽
