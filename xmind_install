@@ -1,8 +1,26 @@
 1. 首先到xmind官网上下载 www.xmind.net ,本版本采用Linux
 xmind-8-update7-linux.zip
 
-2. 解压文件夹，运行 ./setup.sh
+2. 解压文件夹，运行 ./setup.sh，安装软件
 
 3. 进入“XMind_amd64”文件夹，双击XMind，运行Xmind
+进入菜单栏中： 编辑->首选项->常规，取消 “启动时检查更新和消息” 和 “发送用户数据”
+应用并确定，然后关闭软件
 
-4. 首先屏蔽
+4. 在 “XMind_amd64”文件夹下，找到“XMind.ini”文件，双击进入编辑，后面添加：
+-javaagent:../RCE/XMindCrack.jar
+
+5. 返回XMind安装主菜单，新建“RCE”文件夹，并把文件XMindCrack.jar放入该文件夹。
+
+6. 到文件 /etc/hosts下屏蔽 www.xmind.net网址：
+sudo gedit /etc/hosts
+末尾添加：
+0.0.0.0 www.xmind.net
+0.0.0.0 xmind.net
+127.0.0.1 www.xmind.net
+127.0.0.1 xmind.net
+保存并退出
+
+7.运行Xmind，进入菜单栏中： 帮助->序列号->输入序列号
+邮箱： 随便输入一个邮箱
+序列号： XAka34A2rVRYJ4XBIU35UZMUEEF64CMMIYZCK2FZZUQNODEKUHGJLFMSLIQMQUCUBXRENLK6NZL37JXP4PZXQFILMQ2RG5R7G4QNDO3PSOEUBOCDRYSSXZGRARV6MGA33TN2AMUBHEL4FXMWYTTJDEINJXUAV4BAYKBDCZQWVF3LWYXSDCXY546U3NBGOI3ZPAP2SO3CSQFNB7VVIY123456789012345
