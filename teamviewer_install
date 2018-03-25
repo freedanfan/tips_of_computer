@@ -1,0 +1,63 @@
+1. 首先到https://www.teamviewer.com/zhcn/download/linux/下载相应linux版本的Teamviewer，
+teamviewer_13.1.3026_amd64.deb
+
+2. 添加32位架构
+sudo dpkg --add-architecture i386
+sudo apt-get update
+## 在缺少依赖包的安装 需要执行：sudo apt-get -f install
+sudo apt-get -f install
+
+3.sudo dpkg -i teamviewer_13.1.3026_amd64.deb
+
+4. 安装完成
+
+若其中报错：
+dpkg: error processing package teamviewer:i386 (--install):
+dependency problems - leaving unconfigured
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1) ...
+Errors were encountered while processing:
+teamviewer:i386
+##报错原因:这是由于我的ubuntu系统是64位的，必须添加32位的架构。即看步骤2：添加32位架构
+
+如果安装失败想移除重新安装，请执行如下步骤：
+apt-get purge teamviewer
+
+//////////////////////////////////////////////////////////////////////
+
+Ubuntu下命令行方安装TeamViewer
+安装步骤同上，
+
+5. 接受license
+5.1 停止teamview
+>> sudo teamviewer --daemon stop
+
+5.2 修改配置文件
+## 在文件/opt/teamviewer/config/global.conf末尾增加以下内容（由于只读限制，所以可能需要用到管理员权限）
+## [int32] EulaAccepted = 1 
+## [int32] EulaAcceptedRevision = 6 
+>> cd /opt/teamviewer/config/
+>> ll
+>> vim global.conf
+## 添加一下内容
+## [int32] EulaAccepted = 1 
+## [int32] EulaAcceptedRevision = 6 
+## 保存退出
+>> wq
+## 为了一次成功,修改文件后最好是查看一下修改的文件
+>> cat global.conf
+## 确认添加保存了之后启动teamviewer
+
+5.3 启动teamviewer
+>> sudo teamviewer --daemon start
+
+6. 获取Teamviewer ID
+>> teamviewer --info print id
+
+第七步:设置密码
+
+## 设置teamviewer 密码
+>> sudo teamviewer --passwd [NEWPASSWORD]
+
+到此,恭喜你已经安装成功,可以用Windows 测试
+
