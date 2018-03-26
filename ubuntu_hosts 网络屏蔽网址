@@ -1,0 +1,17 @@
+有时候我们会用到本地DNS 域名解析，这个就要涉及到hosts文件，
+windows下在C:\Windows\System32\drivers\etc目录下找到直接改了保存就可以了，那Ubuntu下呢？
+
+首先在修改之前，我们看一下百度的IP。
+ping www.baidu.com
+
+然后用命令打开hosts文件
+sudo gedit /etc/hosts
+
+默认的里面会有localhost的解析
+
+我们在最后面添加本地解析，并保存退出
+
+重启网络
+sudo /etc/init.d/networking restart
+
+再来测试域名，就会发现，这是我们设定的那个ip了
