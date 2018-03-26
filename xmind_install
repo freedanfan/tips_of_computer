@@ -38,8 +38,8 @@ window版本
 2、关闭XMind 8 Pro程序。
 
 3、打开压缩包中的Crack文件夹，将里面的XMind.ini文件复制到XMind 8 Pro的安装目录，
-默认路径为C:\Program Files (x86)\XMind，将原来的XMind.ini文件替换掉。
-
+默认路径为C:\Program Files (x86)\XMind，将原来的XMind.ini文件替换掉。或在末尾加：
+-javaagent:C:\Program Files (x86)\XMind\crack\XMindCrack.jar
 4、将Crack文件夹中的RCE文件夹复制到XMind 8 Pro的安装目录，默认路径为C:\Program Files (x86)\XMind。
 
 5、以记事本的方式打开C:\Windows\System32\drivers\etc文件夹下的hosts文件，将以下两行内容添加进去：
