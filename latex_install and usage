@@ -1,0 +1,22 @@
+配置LaTeX使用环境
+TeXLive + Texstudio  
+
+1.安装texlive
+sudo apt install texlive
+2.安装中文字体包
+sudo apt install latex-cjk-all
+3.安装texstudio
+sudo apt install texstudio
+
+
+使用宏包ctex即可直接使用中文。除了ctex还有CJK， xeCJK, 不过对于pdfLaTeX，ctex应该算是最方便的方式了。
+\usepackage[UTF8]{ctex}
+
+## ubuntu中文支持 ##
+在ubuntu下使用 sudo apt install texlive-full 后，在texstudio中直接使用 \usepackage[UTF8]{ctex} 在pdflatex下编译会出现一堆错误，第一个错误便是:
+    Critical ctex error: "fontset-unavailable" CTeX fontset `fandol' is unavailable in current mode. For immediate help type H <return>. }
+
+这是不要使用pdflatex，改用xelatex即可，在texstudio设置中进行修改，具体如下： 
+Options -> Configure TeXstudio -> Build -> Default Compiler -> XeLaTex
+
+另外推荐说使用xelatex进行编译。在写LaTeX的过程中，记得时不时地编译一下，免得写得多了出现错误不易排查。
