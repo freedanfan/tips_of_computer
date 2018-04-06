@@ -1,0 +1,17 @@
+这篇文章将教大家在Ubuntu Unity上修改应用程序图标,这个教程适合于Ubuntu 14.04, Ubuntu 13.10, Ubuntu 12.04 等使用Unity作为默认桌面环境的发行版。
+
+在Unity桌面环境,程序启动器实际上以.desktop为后缀的文件的形式存储在电脑上,所以我们可以编辑.desktop文件来更改程序图标。
+
+下面将以Firefox为例来教大家更改图标:
+
+一般情况下,.desktop文件会存储在/usr/share/applications/这个目录,而另外一些可能会存储在~/.local/share/applications/目录,具体的大家可以用文件管理器来找到这些文件。
+
+找到后我们就需要进入这个目录,然后编辑它(在终端Terminal使用下面的命令):
+
+cd /usr/share/applications
+
+sudo gedit firefox.desktop
+
+打开后,需要将Icon=后边的改为你自己的新图标的地址,图标文件格式一般为.png大小为64×64或者128×128。
+
+更改好后,点击保存,就可以在Dash查看效果了:
