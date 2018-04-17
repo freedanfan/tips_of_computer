@@ -1,1 +1,21 @@
 pscp document username@ip's_address:/home/
+
+可以看出 PSCP 的使用是很简单的，把常用的几个选项说一下：
+-q 安静模式，传输文件时什么也不显示，否则会显示出文件的传输进度
+
+-P port 指定服务器的 SSH 端口，注意这个是大写字母 P，默认是 -P 22，如果主机的 SSH 端口就是 22，就不用指定了
+-l user 指定以哪个用户的身份登录主机，用户名称也可以和主机名称写在一起，用@分割开，比如：username@server
+-pw passwd 指定登录时所用的口令为：passwd
+
+-C 表示允许压缩传输，提高传输速度
+
+PSCP 基本用法是：
+pscp -P 22 -C c:\a.txt username@server:/path/  
+
+例子：
+1、c:\>pscp -C c:\a.bat username@server:upload/
+就是把本地的c:\a.bat复制到了主机server上的用户username所在的主目录下的upload子目录中（这个路径可能是 /home/username/upload）
+2、c:\>pscp -C c:\a.txt username@server:.
+把本地的 C:\a.txt 复制到主机server的用户username的主目录下
+3、c:\>pscp -C username@server:*.tgz c:\download
+把远程主机server上的用户username主目录下的所有 *.tgz 文件拷贝到本地的 c:\download目录中，如果 SSH 版本是 SSH v1，那这个命令就会出错。 
