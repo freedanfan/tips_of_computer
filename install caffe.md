@@ -53,6 +53,7 @@ sudo gedit Makefile.config
   //#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
   
 #OK ，可以开始编译了，在 caffe 目录下执行 ：
+make clean
 make all -j8  
 make test -j8  
 make runtest -j8  
