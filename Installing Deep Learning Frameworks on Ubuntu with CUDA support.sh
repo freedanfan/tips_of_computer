@@ -96,6 +96,9 @@ opencv3.3.1 CMake需下载的.cache文件夹
 
 set -e
 
+echo "<-----step 0 : 卸载已存在驱动版本 ----->"
+sudo apt-get remove --purge nvidia*
+
 echo "<-----step 1 : install prerequisites ----->"
 sudo apt-get -y update
 sudo apt-get -y upgrade
