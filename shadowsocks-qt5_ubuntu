@@ -28,7 +28,7 @@ encryption-method: aes-256-fcb    # 加密方式，视自己购买的加密而�
 下载 switchyomega
 wget https://www.switchyomega.com/static/file/v2.5.6/SwitchyOmega_Chromium.crx
 或  访问网址下载： https://github.com/FelisCatus/SwitchyOmega/releases
-
+    教程（https://jingyan.baidu.com/article/219f4bf7a0b737de442d38e8.html）
 在“设置”选择> more tools> extensions
 将下载的SwitchyOmega_Chromium.crx 拖入浏览器的extensions区域，点击add extension
 
